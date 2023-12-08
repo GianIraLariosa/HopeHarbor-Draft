@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,25 +27,9 @@
 
                 <div class="_or"></div>
 
-                <form action="" class="the-form">
-
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="Enter your username">
-
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password">
-
-                    <label for="firstname">First Name</label>
-                    <input type="text" name="firstname" id="firstname" placeholder="Enter your first name">
-
-                    <label for="lastname">Last Name</label>
-                    <input type="text" name="lastname" id="lastname" placeholder="Enter your last name">
-
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Enter your email">
-
-
-
+                <form method="post" class="the-form">
+                    {% csrf_token %}
+                    {{form.as_p}}
                     <input type="submit" value="Sign Up">
 
                 </form>
@@ -55,7 +38,7 @@
 
             <div class="form-footer">
                 <div>
-                    <span>Already have an account?</span> <a href="{% url 'user:login' %}">Sign In</a>
+                    <span>Already have an account?</span> <a href="{% url 'donor:login' %}">Sign In</a>
                 </div>
             </div><!-- FORM FOOTER -->
 

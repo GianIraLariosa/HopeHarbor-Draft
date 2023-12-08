@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,7 +81,7 @@ WSGI_APPLICATION = 'HopeHarbor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hopeharbor',
+        'NAME': 'hopeharbor1',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

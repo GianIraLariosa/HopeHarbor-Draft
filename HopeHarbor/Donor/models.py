@@ -7,7 +7,7 @@ class Donor(User):
         ('cash', 'Cash'),
         ('materials', 'Materials'),
     )
-    DonationType = models.CharField(max_length=10, choices=DONATION_CHOICES, default='cash')
+    DonationType = models.CharField(max_length=10, choices=DONATION_CHOICES, null=True)
     UserType = models.CharField(
         max_length=12,
         choices=User.USER_TYPES,  # Use choices from User model
@@ -15,7 +15,7 @@ class Donor(User):
     )
 
     def __str__(self):
-        return f"{self.FirstName} {self.LastName}"
+        return f"{self.Firstname} {self.Lastname}"
 
 
 

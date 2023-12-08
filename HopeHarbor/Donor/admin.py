@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Donor, CashDetails, GoodsDetails, Currency, DIK, Amount_Tracker, Goods_Tracker
 
 class DonorAdmin(admin.ModelAdmin):
-    list_display = ('UserID', 'FirstName', 'LastName', 'EmailAddress', 'UserType', 'DonationType')
+    list_display = ('UserID', 'FirstName', 'LastName', 'EmailAddress', 'UserType', 'DonationType', 'Username', 'Password')
     list_filter = ('UserType', 'DonationType')
     search_fields = ('FirstName', 'LastName', 'EmailAddress')
     # Add other customization options as needed
