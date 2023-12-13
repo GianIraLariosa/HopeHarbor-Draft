@@ -6,6 +6,7 @@ app_name = 'donor'
 urlpatterns = [
     path('login/', views.donor_entry_request, name='login'),
     path('register/', views.registration, name='register'),
-    path('', views.index, name='index'),
-    path('DiKpage/', views.DiK, name='DiK'),
+    path('DiK', views.DiK.as_view(), name='DiK'),
+    path('goods', views.InsertGoods.as_view(), name='goods'),
+    path('goodstracker', views.displayGoodsTracker.as_view(), name='goodstracker')
 ]

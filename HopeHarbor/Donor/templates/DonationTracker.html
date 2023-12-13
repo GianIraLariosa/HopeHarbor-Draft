@@ -54,34 +54,6 @@
   .formbold-btn:hover {
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
   }
-
-
-select {
-  appearance: none;
-  border: 1px;
-  outline: 0;
-  font: inherit;
-  /* Personalize */
-  width: 20rem;
-  padding: 1rem 4rem 1rem 1rem;
-  background: white;
-  color: #0D6EFD;;
-  border-radius: 0.25em;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  /* Remove IE arrow */
-  &::-ms-expand {
-    display: none;
-  }
-  /* Remove focus outline */
-  &:focus {
-    outline: none;
-  }
-  /* <option> colors */
-  option {
-    color: inherit;
-    background-color: var(--option-bg);
-  }
 </style>
 
 <body>
@@ -109,177 +81,38 @@ select {
         <section class="clean-block clean-info dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info" style="font-family: Archivo, sans-serif;">Beneficiaries</h2>
+                    <h2 class="text-info" style="font-family: Archivo, sans-serif;">Donation Tracker</h2>
                 </div>
             </div>
         </section>
 
 <div class="table-wrapper">
+    {% if results %}
     <table class="fl-table">
         <thead>
         <tr>
-            <th>Picture</th>
-            <th colspan="2">Name</th>
+            <th>Goods ID</th>
+            <th>Quantity</th>
+            <th>Admin Username</th>
+            <th>Label</th>
+            <th>Donation Date</th>
         </tr>
         </thead>
         <tbody>
+        {% for row in results %}
         <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Emma Johnson</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select type="submit" >Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                        </select>
-                </div>
-
-                <div class="formbold-input-flex">
-                <form method="post">
-                    {% csrf_token %}
-<!--                    <input type="hidden" name="username" value="{{ username }}">-->
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+            <td>{{ row.3 }}</td>
+            <td>{{ row.4 }}</td>
         </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Liam Smith</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Olivia Brown</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Noah Davis</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Sophia Wilson</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Jackson Anderson</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Isabella Taylor</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Aiden Martinez</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Mia Thompson</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{% static 'guest_avatar.jpg' %}" alt="Description of the image" style="width: 50px;"></td>
-            <td>Lucas White</td>
-            <td>
-                <div class="formbold-input-flex">
-                    <select class="btn btn-outline-primary btn-lg" type="submit">Donate
-                        <option value="Cash">Cash</option>
-                        <option value="Donation in Kind">Donation in Kind</option>
-                    </select>
-                <form action="{% url 'donor:DiK' %}" method="GET">
-                    <button class="formbold-btn" type="submit">Donate</button>
-                </form>
-                </div>
-            </td>
-        </tr>
-        <tbody>
+        {% endfor %}
+        </tbody>
     </table>
+    {% else %}
+        <p>No Results found.</p>
+    {% endif %}
 </div>
 
 

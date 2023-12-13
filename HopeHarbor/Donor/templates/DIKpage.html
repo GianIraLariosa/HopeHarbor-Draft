@@ -200,10 +200,10 @@
         <div class="container"><a class="navbar-brand logo" href="#" style="font-family: Archivo, sans-serif;color: rgba(255,255,255,0.9);font-weight: bold;">HopeHarbor</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html" style="color: rgba(255,255,255,0.9);">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'donor:DiK' %}" style="color: rgba(255,255,255,0.9);">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="pricing.html" style="color: rgb(255,255,255);">donate</a></li>
                     <li class="nav-item"><a class="nav-link" href="about-us.html" style="color: rgb(255,255,255);">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html" style="color: rgb(255,255,255);">register</a></li>
+<!--                    <li class="nav-item"><a class="nav-link" href="contact-us.html" style="color: rgb(255,255,255);">register</a></li>-->
                 </ul>
             </div>
         </div>
@@ -230,7 +230,9 @@
   <!-- Author: FormBold Team -->
   <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
+
+    <form method="post">
+        {% csrf_token %}
       <div class="formbold-form-title">
         <h2 class="">Donation in Kind</h2>
         <p>
@@ -245,7 +247,7 @@
           </label>
           <input
             type="number"
-            name="firstname"
+            name="quantity"
             id="firstname"
             class="formbold-form-input-int"
           />
@@ -259,7 +261,7 @@
         </label>
         <input
           type="text"
-          name="address"
+          name="label"
           id="address"
           class="formbold-form-input"
         />
@@ -271,6 +273,7 @@
             <input
               type="checkbox"
               id="isitperishable"
+              name="perishable"
             />
       <label for="isitperishable">Is it perishable?<label>
         </div>
@@ -284,7 +287,7 @@
         </label>
         <input
           type="date"
-          name="address"
+          name="expiry"
           id="expiry"
           class="formbold-form-input"
         />
@@ -292,6 +295,7 @@
 
       <button class="formbold-btn">Donate</button>
     </form>
+      {{ msg }}
   </div>
 </div>
 

@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
+from django.db import connection
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views import View
 
 from .models import Donor
 from .forms import Donor_Login_Form, Donor_Registration_Form
@@ -13,8 +15,17 @@ def index(request):
 
 
 
-def DiK(request):
-    return render(request, 'DIKpage.html')
+class DiK(View):
+    template='index.html'
+
+    def get(self, request):
+        uname = request.session['username']
+        return render(request, self.template, {'Username': uname})
+
+    def post(self, request):
+        uname = request.session['username']
+        request.session['username'] = uname
+        return redirect('/goods')
 
 
 def donor_entry_request(request):
@@ -27,7 +38,8 @@ def donor_entry_request(request):
             condition1 = Donor.objects.filter(Username=Username)
             condition2 = Donor.objects.filter(Password=Password)
             if condition1 and condition2:
-                return redirect('donor:index')
+                request.session['username'] = Username
+                return HttpResponseRedirect('/DiK')
             elif condition1 and Password != condition2:
                 raise ValidationError("Incorrect Password!")
             else:
@@ -53,3 +65,43 @@ def registration(request):
         form = Donor_Registration_Form()
 
     return render(request, 'registration.html', {'form':form})
+
+
+class InsertGoods(View):
+    template = 'DIKpage.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+    def post(self, request):
+        quantity = request.POST['quantity']
+        label = request.POST['label']
+        perishable = 'perishable' in request.POST
+        expiry = request.POST['expiry']
+        cursor = connection.cursor()
+        username = request.session['username']
+        args = [perishable, expiry or None, label, username, quantity]
+        cursor.callproc('InsertGoodsDonation', args)
+        result = cursor.fetchall()
+        cursor.close()
+        print(result)
+        msg = request.session['username']
+        request.session['username'] = username
+        return redirect('/goodstracker')
+
+
+
+class displayGoodsTracker(View):
+    template = 'DonationTracker.html'
+
+    def get(self, request):
+        donor_username = request.session['username']
+        cursor = connection.cursor()
+        cursor.callproc('DisplayGoodsTracker', [donor_username])
+        results = cursor.fetchall()
+        cursor.close()
+        print(results)
+        return render(request, self.template, {'results': results})
+
+
+
